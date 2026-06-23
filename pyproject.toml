@@ -1,7 +1,10 @@
 [project]
 name = "automation-project-tracker"
 version = "0.1.0"
-description = "Add your description here"
+description = "Data pipeline that turns the automation project Excel tracker into JSON for the dashboard"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.3",
+]
