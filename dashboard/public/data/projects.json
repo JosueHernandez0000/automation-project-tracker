@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-23T20:14:32+00:00",
+  "generatedAt": "2026-06-29T22:39:34+00:00",
   "source": "data/project_tracker.xlsx",
   "projects": [
     {
@@ -28,12 +28,12 @@
       "status": "Active",
       "criticality": "High",
       "role": "Developed",
-      "frequencyPerYear": 8.0,
+      "frequencyPerYear": 12.0,
       "manualMinutes": 120.0,
       "autoMinutes": 10.0,
-      "hoursBefore": 16.0,
-      "hoursAfter": 1.33,
-      "hoursSaved": 14.67,
+      "hoursBefore": 24.0,
+      "hoursAfter": 2.0,
+      "hoursSaved": 22.0,
       "reductionPct": 91.7
     },
     {
@@ -73,9 +73,9 @@
     {
       "id": 5,
       "name": "La favorita",
-      "country": "Peru",
-      "countryIso2": "PE",
-      "countryIso3": "PER",
+      "country": "Ecuador",
+      "countryIso2": "EC",
+      "countryIso3": "ECU",
       "status": "Active",
       "criticality": "Low",
       "role": "Developed",
@@ -191,36 +191,53 @@
     },
     {
       "id": 12,
-      "name": "Claims ROC",
+      "name": "Claims ROC Intake form",
       "country": "Caribbean",
       "countryIso2": null,
       "countryIso3": null,
       "status": "On going",
       "criticality": "Low",
       "role": "Developed",
-      "frequencyPerYear": 300.0,
-      "manualMinutes": 25.0,
-      "autoMinutes": 5.0,
-      "hoursBefore": 125.0,
-      "hoursAfter": 25.0,
-      "hoursSaved": 100.0,
-      "reductionPct": 80.0
+      "frequencyPerYear": 350.0,
+      "manualMinutes": 20.0,
+      "autoMinutes": 2.0,
+      "hoursBefore": 116.67,
+      "hoursAfter": 11.67,
+      "hoursSaved": 105.0,
+      "reductionPct": 90.0
+    },
+    {
+      "id": 13,
+      "name": "Listing Maintenance",
+      "country": "Mexico",
+      "countryIso2": "MX",
+      "countryIso3": "MEX",
+      "status": "Active",
+      "criticality": "Medium",
+      "role": "Developed",
+      "frequencyPerYear": 52.0,
+      "manualMinutes": 15.0,
+      "autoMinutes": 0.0,
+      "hoursBefore": 13.0,
+      "hoursAfter": 0.0,
+      "hoursSaved": 13.0,
+      "reductionPct": 100.0
     }
   ],
   "portfolio": {
-    "totalHoursSaved": 952.98,
-    "projectCount": 12,
+    "totalHoursSaved": 978.31,
+    "projectCount": 13,
     "countryCount": 8,
-    "avgReductionPct": 91.6,
-    "activeCount": 8,
-    "totalWorkdaysSaved": 119.1,
+    "avgReductionPct": 93.0,
+    "activeCount": 9,
+    "totalWorkdaysSaved": 122.3,
     "byCountry": [
       {
         "country": "Mexico",
         "countryIso2": "MX",
         "countryIso3": "MEX",
-        "projectCount": 4,
-        "hoursSaved": 543.34
+        "projectCount": 5,
+        "hoursSaved": 563.67
       },
       {
         "country": "Brazil",
@@ -234,7 +251,7 @@
         "countryIso2": null,
         "countryIso3": null,
         "projectCount": 1,
-        "hoursSaved": 100.0
+        "hoursSaved": 105.0
       },
       {
         "country": "USA",
@@ -258,9 +275,9 @@
         "hoursSaved": 23.8
       },
       {
-        "country": "Peru",
-        "countryIso2": "PE",
-        "countryIso3": "PER",
+        "country": "Ecuador",
+        "countryIso2": "EC",
+        "countryIso3": "ECU",
         "projectCount": 1,
         "hoursSaved": 13.0
       },
@@ -275,8 +292,8 @@
     "byStatus": [
       {
         "label": "Active",
-        "count": 8,
-        "hoursSaved": 671.84
+        "count": 9,
+        "hoursSaved": 692.17
       },
       {
         "label": "Obsolete",
@@ -286,7 +303,7 @@
       {
         "label": "On going",
         "count": 1,
-        "hoursSaved": 100.0
+        "hoursSaved": 105.0
       },
       {
         "label": "On hold",
@@ -298,24 +315,24 @@
       {
         "label": "High",
         "count": 4,
-        "hoursSaved": 643.01
+        "hoursSaved": 650.34
       },
       {
         "label": "Low",
         "count": 6,
-        "hoursSaved": 233.6
+        "hoursSaved": 238.6
       },
       {
         "label": "Medium",
-        "count": 2,
-        "hoursSaved": 76.37
+        "count": 3,
+        "hoursSaved": 89.37
       }
     ],
     "byRole": [
       {
         "label": "Developed",
-        "count": 10,
-        "hoursSaved": 869.28
+        "count": 11,
+        "hoursSaved": 894.61
       },
       {
         "label": "Coached",
@@ -334,82 +351,89 @@
         "name": "myIDM Approvals",
         "country": "Mexico",
         "hoursSaved": 260.0,
-        "cumulativePct": 27.3
+        "cumulativePct": 26.6
       },
       {
         "id": 1,
         "name": "Route - Promoter",
         "country": "Mexico",
         "hoursSaved": 216.67,
-        "cumulativePct": 50.0
+        "cumulativePct": 48.7
       },
       {
         "id": 7,
         "name": "Farol",
         "country": "Brazil",
         "hoursSaved": 151.67,
-        "cumulativePct": 65.9
+        "cumulativePct": 64.2
       },
       {
         "id": 12,
-        "name": "Claims ROC",
+        "name": "Claims ROC Intake form",
         "country": "Caribbean",
-        "hoursSaved": 100.0,
-        "cumulativePct": 76.4
+        "hoursSaved": 105.0,
+        "cumulativePct": 75.0
       },
       {
         "id": 10,
         "name": "PPT Deck",
         "country": "USA",
         "hoursSaved": 59.9,
-        "cumulativePct": 82.7
+        "cumulativePct": 81.1
       },
       {
         "id": 4,
         "name": "Dashboard segmentation",
         "country": "Mexico",
         "hoursSaved": 52.0,
-        "cumulativePct": 88.2
+        "cumulativePct": 86.4
       },
       {
         "id": 8,
         "name": "Report Prezzi",
         "country": "Italy",
         "hoursSaved": 31.8,
-        "cumulativePct": 91.5
+        "cumulativePct": 89.6
       },
       {
         "id": 11,
         "name": "OT Clients - Spain",
         "country": "Spain",
         "hoursSaved": 23.8,
-        "cumulativePct": 94.0
+        "cumulativePct": 92.1
+      },
+      {
+        "id": 2,
+        "name": "Massive Reestructures",
+        "country": "Mexico",
+        "hoursSaved": 22.0,
+        "cumulativePct": 94.3
       },
       {
         "id": 9,
         "name": "Pepsico Champions League",
         "country": "USA",
         "hoursSaved": 16.47,
-        "cumulativePct": 95.7
-      },
-      {
-        "id": 2,
-        "name": "Massive Reestructures",
-        "country": "Mexico",
-        "hoursSaved": 14.67,
-        "cumulativePct": 97.3
+        "cumulativePct": 96.0
       },
       {
         "id": 5,
         "name": "La favorita",
-        "country": "Peru",
+        "country": "Ecuador",
         "hoursSaved": 13.0,
-        "cumulativePct": 98.6
+        "cumulativePct": 97.3
       },
       {
         "id": 6,
         "name": "3PD Report",
         "country": "Colombia",
+        "hoursSaved": 13.0,
+        "cumulativePct": 98.7
+      },
+      {
+        "id": 13,
+        "name": "Listing Maintenance",
+        "country": "Mexico",
         "hoursSaved": 13.0,
         "cumulativePct": 100.0
       }
@@ -422,13 +446,13 @@
       },
       {
         "kind": "leadingCountry",
-        "headline": "Mexico leads with 543 hours/year saved",
+        "headline": "Mexico leads with 564 hours/year saved",
         "value": "Mexico"
       },
       {
         "kind": "workdays",
-        "headline": "That's 119 working days reclaimed every year",
-        "value": 119.0
+        "headline": "That's 122 working days reclaimed every year",
+        "value": 122.0
       }
     ]
   },
