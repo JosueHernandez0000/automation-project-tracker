@@ -12,10 +12,12 @@ from __future__ import annotations
 COLUMN_MAP: dict[str, str] = {
     "No": "id",
     "Process Name": "name",
+    "Capability Center": "capabilityCenter",
     "Country": "country",
     "Status": "status",
     "Criticality": "criticality",
     "Role": "role",
+    "Development time (hrs)": "devHours",
     "Frequency (per year)": "frequencyPerYear",
     "Manual Execution time (min)": "manualMinutes",
     "Automation Execution time (min)": "autoMinutes",
@@ -26,7 +28,8 @@ COLUMN_MAP: dict[str, str] = {
 }
 
 # Raw inputs we recompute derived metrics from (so stale Excel formulas can't lie).
-NUMERIC_INPUTS = ["frequencyPerYear", "manualMinutes", "autoMinutes"]
+# devHours is a one-time build cost (not a rate), but it's still a numeric input we validate.
+NUMERIC_INPUTS = ["frequencyPerYear", "manualMinutes", "autoMinutes", "devHours"]
 
 # --- Canonical label vocabularies ----------------------------------------------
 # Anything not in these maps (after trimming/casefold) fails validation loudly.
@@ -42,6 +45,12 @@ CRITICALITY_CANON: dict[str, str] = {
     "high": "High",
     "medium": "Medium",
     "low": "Low",
+}
+
+# Business area a project belongs to. Controlled vocabulary — extend if more centers appear.
+CAPABILITY_CENTER_CANON: dict[str, str] = {
+    "mcc": "MCC",
+    "kcc": "KCC",
 }
 
 ROLE_CANON: dict[str, str] = {

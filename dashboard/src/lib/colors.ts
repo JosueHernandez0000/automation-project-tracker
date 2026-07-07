@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { useTheme } from "@/theme/useTheme";
-import type { Criticality, Role, Status } from "@/types";
+import type { CapabilityCenter, Criticality, Role, Status } from "@/types";
 
 // A category keeps the same color in every chart so the eye can track it without a legend.
 export const STATUS_TOKEN: Record<Status, string> = {
@@ -21,6 +21,11 @@ export const ROLE_TOKEN: Record<Role, string> = {
   Developed: "--chart-2",
   Coached: "--chart-3",
   "Minor Fix": "--chart-6",
+};
+
+export const CAPABILITY_TOKEN: Record<CapabilityCenter, string> = {
+  MCC: "--chart-2",
+  KCC: "--chart-4",
 };
 
 const PALETTE_TOKENS = ["--chart-1", "--chart-2", "--chart-3", "--chart-4", "--chart-5", "--chart-6"];

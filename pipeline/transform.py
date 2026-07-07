@@ -31,6 +31,9 @@ def normalize_project(raw: dict, warnings: list[str]) -> dict:
     rid = raw.get("id")
 
     name = str(raw["name"]).strip()
+    capability_center = _canon(
+        raw["capabilityCenter"], schema.CAPABILITY_CENTER_CANON, "capabilityCenter", rid
+    )
     country = _canon(raw["country"], schema.COUNTRY_CANON, "country", rid)
     status = _canon(raw["status"], schema.STATUS_CANON, "status", rid)
     criticality = _canon(raw["criticality"], schema.CRITICALITY_CANON, "criticality", rid)
@@ -39,8 +42,14 @@ def normalize_project(raw: dict, warnings: list[str]) -> dict:
     freq = float(raw["frequencyPerYear"])
     manual = float(raw["manualMinutes"])
     auto = float(raw["autoMinutes"])
+    dev_hours = float(raw["devHours"])
 
-    for label, val in (("frequencyPerYear", freq), ("manualMinutes", manual), ("autoMinutes", auto)):
+    for label, val in (
+        ("frequencyPerYear", freq),
+        ("manualMinutes", manual),
+        ("autoMinutes", auto),
+        ("devHours", dev_hours),
+    ):
         if val < 0:
             raise schema.SchemaError(f"Row {rid}: {label} is negative ({val}).")
     if auto > manual:
@@ -52,6 +61,11 @@ def normalize_project(raw: dict, warnings: list[str]) -> dict:
     hours_saved = hours_before - hours_after
     reduction_pct = (1 - auto / manual) * 100.0 if manual > 0 else 0.0
 
+    # Efficiency: dev_hours is a ONE-TIME build cost; hours_saved is ANNUAL. Guard div-by-zero.
+    leverage = round(hours_saved / dev_hours, 2) if dev_hours > 0 else None
+    payback_weeks = round(dev_hours / hours_saved * 52.0, 1) if hours_saved > 0 else None
+    first_year_net = hours_saved - dev_hours
+
     # Cross-check against the workbook's own derived columns; warn on drift.
     _check(rid, name, "hoursBefore", raw.get("hoursBefore"), hours_before, warnings)
     _check(rid, name, "hoursAfter", raw.get("hoursAfter"), hours_after, warnings)
@@ -61,12 +75,14 @@ def normalize_project(raw: dict, warnings: list[str]) -> dict:
     return {
         "id": int(rid),
         "name": name,
+        "capabilityCenter": capability_center,
         "country": country,
         "countryIso2": codes["iso2"],
         "countryIso3": codes["iso3"],
         "status": status,
         "criticality": criticality,
         "role": role,
+        "devHours": round(dev_hours, 2),
         "frequencyPerYear": round(freq, 4),
         "manualMinutes": round(manual, 4),
         "autoMinutes": round(auto, 4),
@@ -74,6 +90,9 @@ def normalize_project(raw: dict, warnings: list[str]) -> dict:
         "hoursAfter": round(hours_after, 2),
         "hoursSaved": round(hours_saved, 2),
         "reductionPct": round(reduction_pct, 1),
+        "leverage": leverage,
+        "paybackWeeks": payback_weeks,
+        "firstYearNet": round(first_year_net, 2),
     }
 
 
@@ -95,12 +114,14 @@ def _check(rid, name, field, workbook_val, computed, warnings: list[str]) -> Non
 def _group(projects: list[dict], key: str) -> list[dict]:
     buckets: dict[str, dict] = {}
     for p in projects:
-        b = buckets.setdefault(p[key], {"label": p[key], "count": 0, "hoursSaved": 0.0})
+        b = buckets.setdefault(p[key], {"label": p[key], "count": 0, "hoursSaved": 0.0, "devHours": 0.0})
         b["count"] += 1
         b["hoursSaved"] += p["hoursSaved"]
+        b["devHours"] += p["devHours"]
     rows = sorted(buckets.values(), key=lambda r: r["hoursSaved"], reverse=True)
     for r in rows:
         r["hoursSaved"] = round(r["hoursSaved"], 2)
+        r["devHours"] = round(r["devHours"], 2)
     return rows
 
 
@@ -113,12 +134,15 @@ def _by_country(projects: list[dict]) -> list[dict]:
             "countryIso3": p["countryIso3"],
             "projectCount": 0,
             "hoursSaved": 0.0,
+            "devHours": 0.0,
         })
         b["projectCount"] += 1
         b["hoursSaved"] += p["hoursSaved"]
+        b["devHours"] += p["devHours"]
     rows = sorted(buckets.values(), key=lambda r: r["hoursSaved"], reverse=True)
     for r in rows:
         r["hoursSaved"] = round(r["hoursSaved"], 2)
+        r["devHours"] = round(r["devHours"], 2)
     return rows
 
 
@@ -137,7 +161,7 @@ def _pareto(projects: list[dict], total: float) -> list[dict]:
     return out
 
 
-def _insights(projects: list[dict], total: float, by_country: list[dict]) -> list[dict]:
+def _insights(projects: list[dict], total: float, by_country: list[dict], total_dev: float) -> list[dict]:
     insights: list[dict] = []
     ranked = sorted(projects, key=lambda p: p["hoursSaved"], reverse=True)
 
@@ -168,6 +192,15 @@ def _insights(projects: list[dict], total: float, by_country: list[dict]) -> lis
         "headline": f"That's {total / WORKDAY_HOURS:.0f} working days reclaimed every year",
         "value": round(total / WORKDAY_HOURS, 0),
     })
+
+    # Efficiency: annual return on the one-time build investment.
+    if total_dev > 0:
+        ratio = total / total_dev
+        insights.append({
+            "kind": "leverage",
+            "headline": f"Every hour invested returns {ratio:.1f} hours saved each year",
+            "value": round(ratio, 1),
+        })
     return insights
 
 
@@ -175,6 +208,13 @@ def build_portfolio(projects: list[dict]) -> dict:
     total = sum(p["hoursSaved"] for p in projects)
     countries = _by_country(projects)
     avg_reduction = sum(p["reductionPct"] for p in projects) / len(projects) if projects else 0.0
+
+    # Effort (one-time build cost) and efficiency (annual return per hour invested).
+    total_dev = sum(p["devHours"] for p in projects)
+    leverages = [p["leverage"] for p in projects if p["leverage"] is not None]
+    avg_leverage = sum(leverages) / len(leverages) if leverages else None
+    payback_weeks = round(total_dev / total * 52.0, 1) if total > 0 else None
+
     return {
         "totalHoursSaved": round(total, 2),
         "projectCount": len(projects),
@@ -182,10 +222,14 @@ def build_portfolio(projects: list[dict]) -> dict:
         "avgReductionPct": round(avg_reduction, 1),
         "activeCount": sum(1 for p in projects if p["status"] == "Active"),
         "totalWorkdaysSaved": round(total / WORKDAY_HOURS, 1),
+        "totalDevHours": round(total_dev, 2),
+        "avgLeverage": round(avg_leverage, 2) if avg_leverage is not None else None,
+        "paybackWeeks": payback_weeks,
         "byCountry": countries,
         "byStatus": _group(projects, "status"),
         "byCriticality": _group(projects, "criticality"),
         "byRole": _group(projects, "role"),
+        "byCapabilityCenter": _group(projects, "capabilityCenter"),
         "paretoRanking": _pareto(projects, total),
-        "insights": _insights(projects, total, countries),
+        "insights": _insights(projects, total, countries, total_dev),
     }

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
+import { CapacityBreakdown } from "@/components/capacity/CapacityBreakdown";
 import { ParetoChart } from "@/components/charts/ParetoChart";
 import { CompositionDonuts } from "@/components/charts/CompositionDonuts";
 import { HoursByProjectChart } from "@/components/charts/HoursByProjectChart";
+import { EfficiencyView } from "@/components/efficiency/EfficiencyView";
 import { ProjectDetail } from "@/components/explorer/ProjectDetail";
 import { HeroImpact } from "@/components/hero/HeroImpact";
 import { KpiStrip } from "@/components/kpi/KpiStrip";
@@ -98,6 +100,20 @@ function Dashboard({ data }: { data: Dataset }) {
         <CompositionDonuts projects={data.projects} />
       </Section>
 
+      <Section
+        title="Where the effort went"
+        subtitle="Development hours invested — the capacity behind the portfolio."
+      >
+        {isEmpty ? <EmptyState /> : <CapacityBreakdown projects={filtered} />}
+      </Section>
+
+      <Section
+        title="What the effort returned"
+        subtitle="Effort vs impact: one-time build hours against annual hours saved."
+      >
+        {isEmpty ? <EmptyState /> : <EfficiencyView projects={filtered} totals={t} />}
+      </Section>
+
       <Section title="Projects" subtitle={`${filtered.length} shown · click any row for full details`}>
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
@@ -105,9 +121,11 @@ function Dashboard({ data }: { data: Dataset }) {
               <thead className="border-b border-border text-left text-muted-foreground">
                 <tr>
                   <Th>Process</Th>
+                  <Th>Center</Th>
                   <Th>Country</Th>
                   <Th>Status</Th>
                   <Th>Criticality</Th>
+                  <Th className="text-right">Dev (h)</Th>
                   <Th className="text-right">Before (h/yr)</Th>
                   <Th className="text-right">After (h/yr)</Th>
                   <Th className="text-right">Hours saved</Th>
@@ -122,6 +140,7 @@ function Dashboard({ data }: { data: Dataset }) {
                     className="cursor-pointer border-b border-border/60 transition-colors last:border-0 hover:bg-muted/60"
                   >
                     <Td className="font-medium">{p.name}</Td>
+                    <Td className="text-muted-foreground">{p.capabilityCenter}</Td>
                     <Td className="text-muted-foreground">{p.country}</Td>
                     <Td>
                       <span className="inline-flex items-center gap-2 text-muted-foreground">
@@ -134,6 +153,9 @@ function Dashboard({ data }: { data: Dataset }) {
                     </Td>
                     <Td className="text-muted-foreground">{p.criticality}</Td>
                     <Td className="text-right tabular-nums text-muted-foreground">
+                      {formatNumber(p.devHours)}
+                    </Td>
+                    <Td className="text-right tabular-nums text-muted-foreground">
                       {formatNumber(p.hoursBefore)}
                     </Td>
                     <Td className="text-right tabular-nums text-muted-foreground">
@@ -145,7 +167,7 @@ function Dashboard({ data }: { data: Dataset }) {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <Td className="py-8 text-center text-muted-foreground" colSpan={8}>
+                    <Td className="py-8 text-center text-muted-foreground" colSpan={10}>
                       No projects match the current filters.
                     </Td>
                   </tr>

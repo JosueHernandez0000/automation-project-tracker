@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { useEffect } from "react";
 
-import { CRITICALITY_TOKEN, ROLE_TOKEN, STATUS_TOKEN, useChartTheme } from "@/lib/colors";
-import { formatNumber, formatPercent } from "@/lib/format";
+import { CAPABILITY_TOKEN, CRITICALITY_TOKEN, ROLE_TOKEN, STATUS_TOKEN, useChartTheme } from "@/lib/colors";
+import { formatNumber, formatPercent, formatRatio } from "@/lib/format";
 import type { Project } from "@/types";
 
 /** Animated detail panel for a single project. Opens from a table row click. */
@@ -62,6 +62,7 @@ function DetailPanel({ project, onClose }: { project: Project; onClose: () => vo
           </button>
           <h3 className="pr-8 text-xl font-semibold tracking-tight">{project.name}</h3>
           <div className="mt-3 flex flex-wrap gap-2">
+            <Badge label={project.capabilityCenter} color={t.resolve(CAPABILITY_TOKEN[project.capabilityCenter])} />
             <Badge label={project.country} />
             <Badge label={project.status} color={t.resolve(STATUS_TOKEN[project.status])} />
             <Badge label={`${project.criticality} criticality`} color={t.resolve(CRITICALITY_TOKEN[project.criticality])} />
@@ -85,6 +86,12 @@ function DetailPanel({ project, onClose }: { project: Project; onClose: () => vo
               </p>
               <p className="text-xs uppercase tracking-wide text-muted-foreground">time reduction</p>
             </div>
+            <div>
+              <p className="text-3xl font-bold tracking-tight tabular-nums">
+                {formatRatio(project.leverage)}
+              </p>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">annual return</p>
+            </div>
           </div>
 
           {/* Before / after */}
@@ -94,7 +101,8 @@ function DetailPanel({ project, onClose }: { project: Project; onClose: () => vo
           </div>
 
           {/* Secondary metrics */}
-          <div className="mt-6 grid grid-cols-3 gap-3 border-t border-border pt-5">
+          <div className="mt-6 grid grid-cols-2 gap-3 border-t border-border pt-5">
+            <Metric label="Dev time (h)" value={formatNumber(project.devHours)} />
             <Metric label="Runs / year" value={formatNumber(project.frequencyPerYear)} />
             <Metric label="Manual (min)" value={formatNumber(project.manualMinutes)} />
             <Metric label="Automated (min)" value={formatNumber(project.autoMinutes)} />

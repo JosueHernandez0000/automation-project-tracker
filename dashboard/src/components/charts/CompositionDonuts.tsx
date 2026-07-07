@@ -3,23 +3,25 @@ import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { Card } from "@/components/ui/Card";
 import { groupBy } from "@/lib/aggregate";
 import {
+  CAPABILITY_TOKEN,
   CRITICALITY_TOKEN,
   ROLE_TOKEN,
   STATUS_TOKEN,
   useChartTheme,
 } from "@/lib/colors";
 import { useFilters } from "@/store/useFilters";
-import type { Criticality, Project, Role, Status } from "@/types";
+import type { CapabilityCenter, Criticality, Project, Role, Status } from "@/types";
 
 /**
- * Three part-of-whole donuts (Status / Criticality / Role). Slices double as filter
- * controls. Computed from the full portfolio so they stay a stable facet reference.
+ * Four part-of-whole donuts (Status / Criticality / Role / Capability Center). Slices
+ * double as filter controls. Computed from the full portfolio so they stay a stable
+ * facet reference.
  */
 export function CompositionDonuts({ projects }: { projects: Project[] }) {
   const f = useFilters();
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Donut
         title="Status"
         data={groupBy(projects, "status")}
@@ -40,6 +42,13 @@ export function CompositionDonuts({ projects }: { projects: Project[] }) {
         tokenMap={ROLE_TOKEN}
         active={f.roles}
         onToggle={(l) => f.toggleRole(l as Role)}
+      />
+      <Donut
+        title="Capability Center"
+        data={groupBy(projects, "capabilityCenter")}
+        tokenMap={CAPABILITY_TOKEN}
+        active={f.capabilityCenters}
+        onToggle={(l) => f.toggleCapabilityCenter(l as CapabilityCenter)}
       />
     </div>
   );

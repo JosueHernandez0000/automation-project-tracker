@@ -1,227 +1,292 @@
 {
-  "generatedAt": "2026-06-29T22:39:34+00:00",
+  "generatedAt": "2026-07-06T20:48:29+00:00",
   "source": "data/project_tracker.xlsx",
   "projects": [
     {
       "id": 1,
       "name": "Route - Promoter",
+      "capabilityCenter": "MCC",
       "country": "Mexico",
       "countryIso2": "MX",
       "countryIso3": "MEX",
       "status": "Active",
       "criticality": "High",
       "role": "Developed",
+      "devHours": 90.0,
       "frequencyPerYear": 260.0,
       "manualMinutes": 60.0,
       "autoMinutes": 10.0,
       "hoursBefore": 260.0,
       "hoursAfter": 43.33,
       "hoursSaved": 216.67,
-      "reductionPct": 83.3
+      "reductionPct": 83.3,
+      "leverage": 2.41,
+      "paybackWeeks": 21.6,
+      "firstYearNet": 126.67
     },
     {
       "id": 2,
       "name": "Massive Reestructures",
+      "capabilityCenter": "MCC",
       "country": "Mexico",
       "countryIso2": "MX",
       "countryIso3": "MEX",
       "status": "Active",
       "criticality": "High",
       "role": "Developed",
+      "devHours": 70.0,
       "frequencyPerYear": 12.0,
       "manualMinutes": 120.0,
       "autoMinutes": 10.0,
       "hoursBefore": 24.0,
       "hoursAfter": 2.0,
       "hoursSaved": 22.0,
-      "reductionPct": 91.7
+      "reductionPct": 91.7,
+      "leverage": 0.31,
+      "paybackWeeks": 165.5,
+      "firstYearNet": -48.0
     },
     {
       "id": 3,
       "name": "myIDM Approvals",
+      "capabilityCenter": "MCC",
       "country": "Mexico",
       "countryIso2": "MX",
       "countryIso3": "MEX",
       "status": "Active",
       "criticality": "High",
       "role": "Developed",
+      "devHours": 60.0,
       "frequencyPerYear": 260.0,
       "manualMinutes": 60.0,
       "autoMinutes": 0.0,
       "hoursBefore": 260.0,
       "hoursAfter": 0.0,
       "hoursSaved": 260.0,
-      "reductionPct": 100.0
+      "reductionPct": 100.0,
+      "leverage": 4.33,
+      "paybackWeeks": 12.0,
+      "firstYearNet": 200.0
     },
     {
       "id": 4,
       "name": "Dashboard segmentation",
+      "capabilityCenter": "MCC",
       "country": "Mexico",
       "countryIso2": "MX",
       "countryIso3": "MEX",
       "status": "Active",
       "criticality": "Low",
       "role": "Developed",
+      "devHours": 24.0,
       "frequencyPerYear": 52.0,
       "manualMinutes": 75.0,
       "autoMinutes": 15.0,
       "hoursBefore": 65.0,
       "hoursAfter": 13.0,
       "hoursSaved": 52.0,
-      "reductionPct": 80.0
+      "reductionPct": 80.0,
+      "leverage": 2.17,
+      "paybackWeeks": 24.0,
+      "firstYearNet": 28.0
     },
     {
       "id": 5,
       "name": "La favorita",
+      "capabilityCenter": "MCC",
       "country": "Ecuador",
       "countryIso2": "EC",
       "countryIso3": "ECU",
       "status": "Active",
       "criticality": "Low",
       "role": "Developed",
+      "devHours": 20.0,
       "frequencyPerYear": 12.0,
       "manualMinutes": 75.0,
       "autoMinutes": 10.0,
       "hoursBefore": 15.0,
       "hoursAfter": 2.0,
       "hoursSaved": 13.0,
-      "reductionPct": 86.7
+      "reductionPct": 86.7,
+      "leverage": 0.65,
+      "paybackWeeks": 80.0,
+      "firstYearNet": -7.0
     },
     {
       "id": 6,
       "name": "3PD Report",
+      "capabilityCenter": "MCC",
       "country": "Colombia",
       "countryIso2": "CO",
       "countryIso3": "COL",
       "status": "Obsolete",
       "criticality": "Low",
       "role": "Developed",
+      "devHours": 20.0,
       "frequencyPerYear": 12.0,
       "manualMinutes": 75.0,
       "autoMinutes": 10.0,
       "hoursBefore": 15.0,
       "hoursAfter": 2.0,
       "hoursSaved": 13.0,
-      "reductionPct": 86.7
+      "reductionPct": 86.7,
+      "leverage": 0.65,
+      "paybackWeeks": 80.0,
+      "firstYearNet": -7.0
     },
     {
       "id": 7,
       "name": "Farol",
+      "capabilityCenter": "MCC",
       "country": "Brazil",
       "countryIso2": "BR",
       "countryIso3": "BRA",
-      "status": "Obsolete",
+      "status": "On hold",
       "criticality": "High",
       "role": "Developed",
+      "devHours": 40.0,
       "frequencyPerYear": 52.0,
       "manualMinutes": 180.0,
       "autoMinutes": 5.0,
       "hoursBefore": 156.0,
       "hoursAfter": 4.33,
       "hoursSaved": 151.67,
-      "reductionPct": 97.2
+      "reductionPct": 97.2,
+      "leverage": 3.79,
+      "paybackWeeks": 13.7,
+      "firstYearNet": 111.67
     },
     {
       "id": 8,
       "name": "Report Prezzi",
+      "capabilityCenter": "KCC",
       "country": "Italy",
       "countryIso2": "IT",
       "countryIso3": "ITA",
       "status": "Active",
       "criticality": "Low",
       "role": "Developed",
+      "devHours": 20.0,
       "frequencyPerYear": 12.0,
       "manualMinutes": 160.0,
       "autoMinutes": 1.0,
       "hoursBefore": 32.0,
       "hoursAfter": 0.2,
       "hoursSaved": 31.8,
-      "reductionPct": 99.4
+      "reductionPct": 99.4,
+      "leverage": 1.59,
+      "paybackWeeks": 32.7,
+      "firstYearNet": 11.8
     },
     {
       "id": 9,
       "name": "Pepsico Champions League",
+      "capabilityCenter": "MCC",
       "country": "USA",
       "countryIso2": "US",
       "countryIso3": "USA",
       "status": "On hold",
       "criticality": "Medium",
       "role": "Developed",
+      "devHours": 24.0,
       "frequencyPerYear": 52.0,
       "manualMinutes": 20.0,
       "autoMinutes": 1.0,
       "hoursBefore": 17.33,
       "hoursAfter": 0.87,
       "hoursSaved": 16.47,
-      "reductionPct": 95.0
+      "reductionPct": 95.0,
+      "leverage": 0.69,
+      "paybackWeeks": 75.8,
+      "firstYearNet": -7.53
     },
     {
       "id": 10,
       "name": "PPT Deck",
+      "capabilityCenter": "MCC",
       "country": "USA",
       "countryIso2": "US",
       "countryIso3": "USA",
       "status": "Active",
       "criticality": "Medium",
       "role": "Coached",
+      "devHours": 5.0,
       "frequencyPerYear": 6.0,
       "manualMinutes": 600.0,
       "autoMinutes": 1.0,
       "hoursBefore": 60.0,
       "hoursAfter": 0.1,
       "hoursSaved": 59.9,
-      "reductionPct": 99.8
+      "reductionPct": 99.8,
+      "leverage": 11.98,
+      "paybackWeeks": 4.3,
+      "firstYearNet": 54.9
     },
     {
       "id": 11,
       "name": "OT Clients - Spain",
+      "capabilityCenter": "KCC",
       "country": "Spain",
       "countryIso2": "ES",
       "countryIso3": "ESP",
       "status": "Active",
       "criticality": "Low",
       "role": "Minor Fix",
+      "devHours": 5.0,
       "frequencyPerYear": 12.0,
       "manualMinutes": 120.0,
       "autoMinutes": 1.0,
       "hoursBefore": 24.0,
       "hoursAfter": 0.2,
       "hoursSaved": 23.8,
-      "reductionPct": 99.2
+      "reductionPct": 99.2,
+      "leverage": 4.76,
+      "paybackWeeks": 10.9,
+      "firstYearNet": 18.8
     },
     {
       "id": 12,
       "name": "Claims ROC Intake form",
+      "capabilityCenter": "MCC",
       "country": "Caribbean",
       "countryIso2": null,
       "countryIso3": null,
       "status": "On going",
       "criticality": "Low",
       "role": "Developed",
+      "devHours": 15.0,
       "frequencyPerYear": 350.0,
       "manualMinutes": 20.0,
       "autoMinutes": 2.0,
       "hoursBefore": 116.67,
       "hoursAfter": 11.67,
       "hoursSaved": 105.0,
-      "reductionPct": 90.0
+      "reductionPct": 90.0,
+      "leverage": 7.0,
+      "paybackWeeks": 7.4,
+      "firstYearNet": 90.0
     },
     {
       "id": 13,
       "name": "Listing Maintenance",
+      "capabilityCenter": "MCC",
       "country": "Mexico",
       "countryIso2": "MX",
       "countryIso3": "MEX",
       "status": "Active",
       "criticality": "Medium",
       "role": "Developed",
+      "devHours": 4.0,
       "frequencyPerYear": 52.0,
       "manualMinutes": 15.0,
       "autoMinutes": 0.0,
       "hoursBefore": 13.0,
       "hoursAfter": 0.0,
       "hoursSaved": 13.0,
-      "reductionPct": 100.0
+      "reductionPct": 100.0,
+      "leverage": 3.25,
+      "paybackWeeks": 16.0,
+      "firstYearNet": 9.0
     }
   ],
   "portfolio": {
@@ -231,118 +296,153 @@
     "avgReductionPct": 93.0,
     "activeCount": 9,
     "totalWorkdaysSaved": 122.3,
+    "totalDevHours": 397.0,
+    "avgLeverage": 3.35,
+    "paybackWeeks": 21.1,
     "byCountry": [
       {
         "country": "Mexico",
         "countryIso2": "MX",
         "countryIso3": "MEX",
         "projectCount": 5,
-        "hoursSaved": 563.67
+        "hoursSaved": 563.67,
+        "devHours": 248.0
       },
       {
         "country": "Brazil",
         "countryIso2": "BR",
         "countryIso3": "BRA",
         "projectCount": 1,
-        "hoursSaved": 151.67
+        "hoursSaved": 151.67,
+        "devHours": 40.0
       },
       {
         "country": "Caribbean",
         "countryIso2": null,
         "countryIso3": null,
         "projectCount": 1,
-        "hoursSaved": 105.0
+        "hoursSaved": 105.0,
+        "devHours": 15.0
       },
       {
         "country": "USA",
         "countryIso2": "US",
         "countryIso3": "USA",
         "projectCount": 2,
-        "hoursSaved": 76.37
+        "hoursSaved": 76.37,
+        "devHours": 29.0
       },
       {
         "country": "Italy",
         "countryIso2": "IT",
         "countryIso3": "ITA",
         "projectCount": 1,
-        "hoursSaved": 31.8
+        "hoursSaved": 31.8,
+        "devHours": 20.0
       },
       {
         "country": "Spain",
         "countryIso2": "ES",
         "countryIso3": "ESP",
         "projectCount": 1,
-        "hoursSaved": 23.8
+        "hoursSaved": 23.8,
+        "devHours": 5.0
       },
       {
         "country": "Ecuador",
         "countryIso2": "EC",
         "countryIso3": "ECU",
         "projectCount": 1,
-        "hoursSaved": 13.0
+        "hoursSaved": 13.0,
+        "devHours": 20.0
       },
       {
         "country": "Colombia",
         "countryIso2": "CO",
         "countryIso3": "COL",
         "projectCount": 1,
-        "hoursSaved": 13.0
+        "hoursSaved": 13.0,
+        "devHours": 20.0
       }
     ],
     "byStatus": [
       {
         "label": "Active",
         "count": 9,
-        "hoursSaved": 692.17
+        "hoursSaved": 692.17,
+        "devHours": 298.0
       },
       {
-        "label": "Obsolete",
+        "label": "On hold",
         "count": 2,
-        "hoursSaved": 164.67
+        "hoursSaved": 168.14,
+        "devHours": 64.0
       },
       {
         "label": "On going",
         "count": 1,
-        "hoursSaved": 105.0
+        "hoursSaved": 105.0,
+        "devHours": 15.0
       },
       {
-        "label": "On hold",
+        "label": "Obsolete",
         "count": 1,
-        "hoursSaved": 16.47
+        "hoursSaved": 13.0,
+        "devHours": 20.0
       }
     ],
     "byCriticality": [
       {
         "label": "High",
         "count": 4,
-        "hoursSaved": 650.34
+        "hoursSaved": 650.34,
+        "devHours": 260.0
       },
       {
         "label": "Low",
         "count": 6,
-        "hoursSaved": 238.6
+        "hoursSaved": 238.6,
+        "devHours": 104.0
       },
       {
         "label": "Medium",
         "count": 3,
-        "hoursSaved": 89.37
+        "hoursSaved": 89.37,
+        "devHours": 33.0
       }
     ],
     "byRole": [
       {
         "label": "Developed",
         "count": 11,
-        "hoursSaved": 894.61
+        "hoursSaved": 894.61,
+        "devHours": 387.0
       },
       {
         "label": "Coached",
         "count": 1,
-        "hoursSaved": 59.9
+        "hoursSaved": 59.9,
+        "devHours": 5.0
       },
       {
         "label": "Minor Fix",
         "count": 1,
-        "hoursSaved": 23.8
+        "hoursSaved": 23.8,
+        "devHours": 5.0
+      }
+    ],
+    "byCapabilityCenter": [
+      {
+        "label": "MCC",
+        "count": 11,
+        "hoursSaved": 922.71,
+        "devHours": 372.0
+      },
+      {
+        "label": "KCC",
+        "count": 2,
+        "hoursSaved": 55.6,
+        "devHours": 25.0
       }
     ],
     "paretoRanking": [
@@ -453,6 +553,11 @@
         "kind": "workdays",
         "headline": "That's 122 working days reclaimed every year",
         "value": 122.0
+      },
+      {
+        "kind": "leverage",
+        "headline": "Every hour invested returns 2.5 hours saved each year",
+        "value": 2.5
       }
     ]
   },

@@ -2,11 +2,12 @@ import { X } from "lucide-react";
 
 import { Chip } from "@/components/ui/Chip";
 import { applyFilters, isFilterActive, useFilters } from "@/store/useFilters";
-import type { Criticality, Project, Role, Status } from "@/types";
+import type { CapabilityCenter, Criticality, Project, Role, Status } from "@/types";
 
 const STATUSES: Status[] = ["Active", "On going", "On hold", "Obsolete"];
 const CRITICALITIES: Criticality[] = ["High", "Medium", "Low"];
 const ROLES: Role[] = ["Developed", "Coached", "Minor Fix"];
+const CENTERS: CapabilityCenter[] = ["MCC", "KCC"];
 
 /** Global filter controls. For Phase B this proves the store drives the whole app. */
 export function FilterBar({ projects }: { projects: Project[] }) {
@@ -41,6 +42,15 @@ export function FilterBar({ projects }: { projects: Project[] }) {
         {ROLES.map((r) => (
           <Chip key={r} active={f.roles.includes(r)} onClick={() => f.toggleRole(r)}>
             {r}
+          </Chip>
+        ))}
+
+        <span className="mx-1 ml-3 hidden text-xs font-medium uppercase tracking-wide text-muted-foreground sm:inline">
+          Center
+        </span>
+        {CENTERS.map((c) => (
+          <Chip key={c} active={f.capabilityCenters.includes(c)} onClick={() => f.toggleCapabilityCenter(c)}>
+            {c}
           </Chip>
         ))}
 
