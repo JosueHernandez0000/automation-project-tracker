@@ -7,6 +7,8 @@ disagrees beyond tolerance, we record a warning rather than failing.
 
 from __future__ import annotations
 
+import math
+
 from . import schema
 
 # Standard working-hours assumption for "human" framing of the headline number.
@@ -26,6 +28,22 @@ def _canon(value, table: dict[str, str], field: str, row_id) -> str:
     return table[key]
 
 
+def _num(raw: dict, field: str, rid, name: str, status: str, warnings: list[str]) -> float:
+    """Read a numeric input. A blank/non-numeric cell is an error, except for
+    'On hold' projects (not yet measured), which count as 0 with a warning."""
+    val = raw.get(field)
+    try:
+        num = float(val)
+    except (TypeError, ValueError):
+        num = float("nan")
+    if math.isnan(num):
+        if status == "On hold":
+            warnings.append(f"Row {rid} ({name}): '{field}' is blank; treated as 0 (project is On hold).")
+            return 0.0
+        raise schema.SchemaError(f"Row {rid} ({name}): '{field}' is blank or not a number ({val!r}).")
+    return num
+
+
 def normalize_project(raw: dict, warnings: list[str]) -> dict:
     """Clean one row into a typed project dict with recomputed derived metrics."""
     rid = raw.get("id")
@@ -39,10 +57,10 @@ def normalize_project(raw: dict, warnings: list[str]) -> dict:
     criticality = _canon(raw["criticality"], schema.CRITICALITY_CANON, "criticality", rid)
     role = _canon(raw["role"], schema.ROLE_CANON, "role", rid)
 
-    freq = float(raw["frequencyPerYear"])
-    manual = float(raw["manualMinutes"])
-    auto = float(raw["autoMinutes"])
-    dev_hours = float(raw["devHours"])
+    freq = _num(raw, "frequencyPerYear", rid, name, status, warnings)
+    manual = _num(raw, "manualMinutes", rid, name, status, warnings)
+    auto = _num(raw, "autoMinutes", rid, name, status, warnings)
+    dev_hours = _num(raw, "devHours", rid, name, status, warnings)
 
     for label, val in (
         ("frequencyPerYear", freq),
