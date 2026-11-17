@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T15:07:14+00:00",
+  "generatedAt": "2026-11-17T15:19:49+00:00",
   "source": "data/project_tracker.xlsx",
   "projects": [
     {
@@ -339,7 +339,7 @@
       "country": "India",
       "countryIso2": "IN",
       "countryIso3": "IND",
-      "status": "Active",
+      "status": "On going",
       "criticality": "High",
       "role": "Developed",
       "devHours": 100.0,
@@ -382,7 +382,7 @@
     "projectCount": 17,
     "countryCount": 10,
     "avgReductionPct": 92.6,
-    "activeCount": 13,
+    "activeCount": 12,
     "totalWorkdaysSaved": 278.9,
     "totalDevHours": 652.0,
     "avgLeverage": 3.42,
@@ -471,22 +471,22 @@
     ],
     "byStatus": [
       {
+        "label": "On going",
+        "count": 2,
+        "hoursSaved": 1119.0,
+        "devHours": 115.0
+      },
+      {
         "label": "Active",
-        "count": 13,
-        "hoursSaved": 1944.76,
-        "devHours": 553.0
+        "count": 12,
+        "hoursSaved": 930.76,
+        "devHours": 453.0
       },
       {
         "label": "Obsolete",
         "count": 3,
         "hoursSaved": 181.14,
         "devHours": 84.0
-      },
-      {
-        "label": "On going",
-        "count": 1,
-        "hoursSaved": 105.0,
-        "devHours": 15.0
       }
     ],
     "byCriticality": [
