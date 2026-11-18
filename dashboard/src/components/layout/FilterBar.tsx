@@ -7,7 +7,7 @@ import type { CapabilityCenter, Criticality, Project, Role, Status } from "@/typ
 const STATUSES: Status[] = ["Active", "On going", "On hold", "Obsolete"];
 const CRITICALITIES: Criticality[] = ["High", "Medium", "Low"];
 const ROLES: Role[] = ["Developed", "Coached", "Minor Fix"];
-const CENTERS: CapabilityCenter[] = ["MCC", "KCC"];
+const CENTERS: CapabilityCenter[] = ["MCC", "KCC", "ICC"];
 
 /** Global filter controls. For Phase B this proves the store drives the whole app. */
 export function FilterBar({ projects }: { projects: Project[] }) {

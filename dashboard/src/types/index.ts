@@ -3,7 +3,7 @@
 export type Status = "Active" | "Obsolete" | "On hold" | "On going";
 export type Criticality = "High" | "Medium" | "Low";
 export type Role = "Developed" | "Coached" | "Minor Fix";
-export type CapabilityCenter = "MCC" | "KCC";
+export type CapabilityCenter = "MCC" | "KCC" | "ICC";
 
 export interface Project {
   id: number;

@@ -4,7 +4,7 @@ A premium, interactive web dashboard that turns a single Excel tracker of automa
 projects into an executive-grade story of business impact — time saved, efficiency gains,
 and global reach. Runs entirely locally, opens in a browser, light/dark mode included.
 
-> **At a glance:** ~953 hours/year saved · 12 projects · 8 countries · ~92% avg. time reduction.
+> **At a glance:** ~2,673 hours/year saved · 19 projects · 10 countries · 3 capability centers · ~93% avg. time reduction.
 
 ---
 
@@ -45,8 +45,8 @@ The experience is a scrollable executive narrative: **headline impact → where 
 - **Filter-aware KPIs** that recount as you filter.
 - **World bubble map** — impact by country; click a country to filter the whole dashboard.
 - **Pareto analysis** proving a few projects drive most of the savings (80/20).
-- **Ranked hours-by-project** bars and **composition donuts** (Status / Criticality / Role)
-  whose slices act as filters.
+- **Ranked hours-by-project** bars and **composition donuts** (Status / Criticality / Role /
+  Capability Center) whose slices act as filters.
 - **Click-through detail panel** per project with a before/after visualization.
 - **Light/dark mode**, smooth motion (respects `prefers-reduced-motion`), and projector-friendly typography.
 - **Save as PDF** for a paper-clean snapshot.
@@ -114,7 +114,7 @@ browser's print-to-PDF for a clean, paper-white copy — handy for decks or emai
 
 ## Architecture
 
-```
+```text
 ┌─────────────────┐   uv run        ┌──────────────────┐   fetch    ┌──────────────┐
 │ project_tracker │ ──────────────▶ │  Python pipeline │ ──JSON───▶ │  React app   │
 │     .xlsx       │   build_data    │ clean + validate │            │ (static SPA) │
@@ -130,7 +130,7 @@ browser's print-to-PDF for a clean, paper-white copy — handy for decks or emai
 
 ## Folder structure
 
-```
+```text
 automation-project-tracker/
 ├── data/project_tracker.xlsx       # source of truth (you edit this)
 ├── pipeline/                       # Python: Excel -> projects.json
@@ -179,16 +179,25 @@ automation-project-tracker/
 
 `projects.json` = `{ generatedAt, source, projects[], portfolio, warnings[] }`.
 
-Each project carries: `id, name, country, countryIso2/3, status, criticality, role,
-frequencyPerYear, manualMinutes, autoMinutes, hoursBefore, hoursAfter, hoursSaved,
-reductionPct`. The `portfolio` block holds precomputed totals, per-country/status/criticality/role
-aggregates, a Pareto ranking, and auto-generated insights.
+Each project carries: `id, name, capabilityCenter, country, countryIso2/3, status, criticality,
+role, devHours, frequencyPerYear, manualMinutes, autoMinutes, hoursBefore, hoursAfter,
+hoursSaved, reductionPct`. The `portfolio` block holds precomputed totals,
+per-country/status/criticality/role/capability-center aggregates, a Pareto ranking, and
+auto-generated insights.
 
 Allowed categorical values:
 
 - **Status:** Active · Obsolete · On hold · On going
 - **Criticality:** High · Medium · Low
 - **Role:** Developed · Coached · Minor Fix
+- **Capability Center:** MCC · KCC · ICC
+
+**Country is where the process has its impact, not where the supporting team sits.** For
+example, NLF is supported for the ICC team but serves PepsiCo UK, so it is recorded as `UK`.
+
+The workbook also has an **Origin** column (Own process · Assigned · Own initiative ·
+Automation committee · Coached) that records where each project came from. The pipeline
+does not read it yet, so it does not appear in `projects.json` or the dashboard.
 
 ## Maintenance
 
@@ -199,13 +208,25 @@ Allowed categorical values:
 2. Run `./scripts/update.ps1` (or `.sh`).
 3. Preview with `npm --prefix dashboard run preview`.
 
-### Add a new label (Status / Criticality / Role / Country)
+A blank numeric input fails the pipeline, except on an **On hold** project, where it is treated
+as 0 with a warning.
+
+> **Editing the workbook from Python?** `openpyxl` drops Excel's cached formula results when it
+> saves, and the pipeline reads cached values. A formula used as an input (for example a
+> frequency written as `=260*3`) then reads as blank and the pipeline stops. Open the file in
+> Excel and save it (or recalculate and save it through Excel) before running the pipeline.
+
+### Add a new label (Status / Criticality / Role / Capability Center / Country)
 
 The pipeline rejects unknown values with an exact message. To register a new one:
 
 - Add it to the matching `*_CANON` map in `pipeline/schema.py` (and `COUNTRY_CODES` for a country).
 - For a new **country**, also add its `[longitude, latitude]` to `COUNTRY_COORDS` in
   `dashboard/src/lib/geo.ts` so it appears on the map.
+- For a new **capability center**, also add it to the `CapabilityCenter` type in
+  `dashboard/src/types/index.ts`, to `CAPABILITY_TOKEN` in `dashboard/src/lib/colors.ts`, and to
+  `CENTERS` in `dashboard/src/components/layout/FilterBar.tsx`. `npm run build` catches a missing
+  color, but not a missing filter chip.
 
 ## Documentation
 

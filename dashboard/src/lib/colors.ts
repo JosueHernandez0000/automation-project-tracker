@@ -26,6 +26,7 @@ export const ROLE_TOKEN: Record<Role, string> = {
 export const CAPABILITY_TOKEN: Record<CapabilityCenter, string> = {
   MCC: "--chart-2",
   KCC: "--chart-4",
+  ICC: "--chart-3",
 };
 
 const PALETTE_TOKENS = ["--chart-1", "--chart-2", "--chart-3", "--chart-4", "--chart-5", "--chart-6"];

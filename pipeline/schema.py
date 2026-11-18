@@ -51,6 +51,7 @@ CRITICALITY_CANON: dict[str, str] = {
 CAPABILITY_CENTER_CANON: dict[str, str] = {
     "mcc": "MCC",
     "kcc": "KCC",
+    "icc": "ICC",
 }
 
 ROLE_CANON: dict[str, str] = {
@@ -73,6 +74,8 @@ COUNTRY_CANON: dict[str, str] = {
     "spain": "Spain",
     "colombia": "Colombia",
     "india": "India",
+    "uk": "UK",
+    "united kingdom": "UK",
     "canada": "Canada",
 }
 
@@ -88,6 +91,7 @@ COUNTRY_CODES: dict[str, dict[str, str | None]] = {
     "Spain": {"iso2": "ES", "iso3": "ESP"},
     "Colombia": {"iso2": "CO", "iso3": "COL"},
     "India": {"iso2": "IN", "iso3": "IND"},
+    "UK": {"iso2": "GB", "iso3": "GBR"},
     "Canada": {"iso2": "CA", "iso3": "CAN"},
     "Caribbean": {"iso2": None, "iso3": None},
 }

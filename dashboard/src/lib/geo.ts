@@ -10,6 +10,7 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   Spain: [-3.7, 40.2],
   Colombia: [-73.5, 4.5],
   India: [78.9, 22.5],
+  UK: [-2, 54],
   Canada: [-98, 56],
   Caribbean: [-66, 18],
 };
