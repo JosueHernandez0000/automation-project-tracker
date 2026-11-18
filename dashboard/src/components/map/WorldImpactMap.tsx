@@ -8,7 +8,8 @@ import { formatNumber } from "@/lib/format";
 import { useFilters } from "@/store/useFilters";
 import type { Project } from "@/types";
 
-const GEO_URL = `${import.meta.env.BASE_URL}geo/countries-110m.json`;
+// Embedded geometry in the standalone HTML export; fetched from /public otherwise.
+const GEO_SOURCE = window.__GEO_DATA__ ?? `${import.meta.env.BASE_URL}geo/countries-110m.json`;
 
 /**
  * Bubble map: one circle per country, area-proportional to hours saved, clickable to
@@ -43,7 +44,7 @@ export function WorldImpactMap({ projects }: { projects: Project[] }) {
           marginLeft: `-${CROP_LEFT * scale * 100}%`,
         }}
       >
-        <Geographies geography={GEO_URL}>
+        <Geographies geography={GEO_SOURCE}>
           {({ geographies }) =>
             geographies.map((geo) => (
               <Geography
